@@ -48,7 +48,7 @@ return {
                     "html",             -- HTML
                     "cssls",            -- CSS
                     "ts_ls",            -- TypeScript/JavaScript
-                    "volar",            -- Vue 3 (官方 LSP)
+                    "vue_ls",           -- Vue 3 (Volar)
                     "tailwindcss",      -- Tailwind CSS
                     "emmet_ls",         -- Emmet (HTML/CSS 快速編寫)
 
@@ -82,7 +82,7 @@ return {
             -- 暫時禁用 lspconfig 的 deprecation 警告（等待 v3.0 正式版本）
             local notify = vim.notify
             vim.notify = function(msg, ...)
-                if msg:match("lspconfig.*deprecated") then
+                if msg:match("lspconfig") or msg:match("deprecated") then
                     return
                 end
                 notify(msg, ...)
@@ -148,25 +148,18 @@ return {
             end
 
             -- ============================
-            -- 診斷符號設定
-            -- ============================
-            local signs = {
-                { name = "DiagnosticSignError", text = "" },
-                { name = "DiagnosticSignWarn", text = "" },
-                { name = "DiagnosticSignHint", text = "" },
-                { name = "DiagnosticSignInfo", text = "" },
-            }
-
-            for _, sign in ipairs(signs) do
-                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-            end
-
-            -- ============================
-            -- 診斷配置
+            -- 診斷配置（包含符號設定）
             -- ============================
             vim.diagnostic.config({
                 virtual_text = true,      -- 在行尾顯示錯誤訊息
-                signs = true,             -- 在 sign column 顯示符號
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                    },
+                },
                 update_in_insert = false, -- 插入模式不更新診斷
                 underline = true,         -- 錯誤處加底線
                 severity_sort = true,     -- 按嚴重程度排序
@@ -213,8 +206,8 @@ return {
                     },
                 },
 
-                -- Vue 3
-                volar = {
+                -- Vue 3 (Volar)
+                vue_ls = {
                     filetypes = { "vue" },
                 },
 
@@ -263,6 +256,15 @@ return {
             }
 
             -- 統一配置所有 LSP 伺服器
+            -- 暫時抑制 lspconfig 的棄用警告（setup 調用時）
+            local old_notify = vim.notify
+            vim.notify = function(msg, ...)
+                if type(msg) == "string" and (msg:match("lspconfig") or msg:match("deprecated")) then
+                    return
+                end
+                old_notify(msg, ...)
+            end
+
             for server_name, server_config in pairs(servers) do
                 local config = vim.tbl_deep_extend("force", {
                     capabilities = capabilities,
@@ -271,6 +273,9 @@ return {
 
                 lspconfig[server_name].setup(config)
             end
+
+            -- 恢復 notify
+            vim.notify = old_notify
 
             -- ============================
             -- 使用說明

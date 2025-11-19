@@ -38,10 +38,10 @@ return {
                 "html",
                 "css",
                 "scss",              -- Sass/SCSS
-                "javascript",
+                "javascript",        -- 已包含 JSX 支援
                 "typescript",
                 "tsx",               -- React (TypeScript)
-                "jsx",               -- React (JavaScript)
+                -- 注意："jsx" 已整合到 "javascript" parser 中，不需要單獨安裝
                 "vue",               -- Vue 3
                 "json",
                 "yaml",
