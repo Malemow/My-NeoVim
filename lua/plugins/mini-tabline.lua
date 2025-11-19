@@ -69,10 +69,15 @@ return {
         })
 
         -- ============================
-        -- 額外的快捷鍵（選用）
+        -- 額外的快捷鍵（使用 mini.bufremove）
         -- ============================
-        -- 如果你想要更方便地關閉 buffer，可以加上這個快捷鍵
-        vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "關閉當前 buffer" })
-        vim.keymap.set("n", "<leader>bD", ":bd!<CR>", { desc = "強制關閉當前 buffer" })
+        -- 關閉 buffer 但保留視窗佈局
+        vim.keymap.set("n", "<leader>bd", function()
+            require("mini.bufremove").delete(0, false)
+        end, { desc = "關閉當前 buffer" })
+
+        vim.keymap.set("n", "<leader>bD", function()
+            require("mini.bufremove").delete(0, true)
+        end, { desc = "強制關閉當前 buffer" })
     end,
 }

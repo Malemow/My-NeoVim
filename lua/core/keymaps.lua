@@ -40,11 +40,15 @@ keymap.set("n", "[b", ":bprevious<CR>")
 -- 開啟新的空白 buffer
 keymap.set("n", "<leader>bn", ":enew<CR>", { desc = "新增空白 buffer" })
 
--- 關閉當前 buffer（更直觀的快捷鍵）
-keymap.set("n", "<leader>q", ":bd<CR>", { desc = "關閉當前 buffer" })
+-- 關閉當前 buffer（使用 mini.bufremove 保留視窗佈局）
+keymap.set("n", "<leader>q", function()
+    require("mini.bufremove").delete(0, false)
+end, { desc = "關閉當前 buffer" })
 
--- 強制關閉當前 buffer
-keymap.set("n", "<leader>Q", ":bd!<CR>", { desc = "強制關閉 buffer（不儲存）" })
+-- 強制關閉當前 buffer（使用 mini.bufremove 保留視窗佈局）
+keymap.set("n", "<leader>Q", function()
+    require("mini.bufremove").delete(0, true)
+end, { desc = "強制關閉 buffer（不儲存）" })
 
 -- 注意：<C-h/j/k/l> 保留給 vim-tmux-navigator 使用（窗口導航）
 
