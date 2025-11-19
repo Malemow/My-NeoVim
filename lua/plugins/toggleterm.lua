@@ -26,7 +26,8 @@ return {
     persist_mode = true,
     direction = "float",
     close_on_exit = true,
-    shell = vim.o.shell,
+    -- Windows 上使用 PowerShell
+    shell = vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell",
     auto_scroll = true,
     float_opts = {
       border = "curved",

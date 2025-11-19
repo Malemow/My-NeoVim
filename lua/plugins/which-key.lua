@@ -99,6 +99,8 @@ return {
             -- ============================
             { "<leader>f", group = "搜尋 (Find)" },
             { "<leader>ff", desc = "搜尋檔案" },
+            { "<leader>fe", desc = "檔案瀏覽器 (可輸入 ..)" },
+            { "<leader>fE", desc = "檔案瀏覽器 (根目錄)" },
             { "<leader>fh", desc = "搜尋檔案 (Home)" },
             { "<leader>fF", desc = "搜尋檔案 (根目錄)" },
             { "<leader>fr", desc = "搜尋最近檔案" },
@@ -198,8 +200,6 @@ return {
             -- 程式碼導航
             { "[o", desc = "上一個註解/舊檔案" },
             { "]o", desc = "下一個註解/舊檔案" },
-            { "[x", desc = "上一個衝突標記" },
-            { "]x", desc = "下一個衝突標記" },
 
             -- TODO 註解導航
             { "[t", desc = "上一個 TODO 註解" },
@@ -224,6 +224,23 @@ return {
             { "<leader>nh", desc = "顯示 Noice 歷史" },
             { "<leader>nd", desc = "關閉所有通知" },
             { "<leader>ne", desc = "顯示錯誤" },
+
+            -- ============================
+            -- Trouble 診斷面板
+            -- ============================
+            { "<leader>x", group = "Trouble 診斷" },
+            { "<leader>xx", desc = "診斷列表 (Trouble)" },
+            { "<leader>xX", desc = "當前文件診斷 (Trouble)" },
+            { "<leader>xs", desc = "符號大綱 (Trouble)" },
+            { "<leader>xl", desc = "LSP 定義/引用 (Trouble)" },
+            { "<leader>xL", desc = "Location List (Trouble)" },
+            { "<leader>xQ", desc = "Quickfix List (Trouble)" },
+            { "<leader>xt", desc = "TODO 列表 (Trouble)" },
+            { "<leader>xT", desc = "TODO/FIX/FIXME (Trouble)" },
+
+            -- Trouble 導航
+            { "[x", desc = "上一個問題 (Trouble)" },
+            { "]x", desc = "下一個問題 (Trouble)" },
 
             -- ============================
             -- Package 管理（package.json 中）
@@ -266,12 +283,27 @@ return {
             { "<C-\\>", desc = "切換終端" },
 
             -- ============================
-            -- 會話管理 (persistence)
+            -- 會話管理 (mini.sessions)
             -- ============================
             { "<leader>S", group = "會話 (Session)" },
-            { "<leader>Ss", desc = "恢復會話" },
-            { "<leader>Sl", desc = "恢復上次會話" },
-            { "<leader>Sd", desc = "停止會話記錄" },
+            { "<leader>Ss", desc = "恢復當前目錄會話" },
+            { "<leader>Sw", desc = "保存當前目錄會話" },
+            { "<leader>Sl", desc = "選擇並載入會話" },
+            { "<leader>Sd", desc = "刪除會話" },
+            { "<leader>Sn", desc = "保存命名會話" },
+
+            -- ============================
+            -- AI 助手 (Claude Code)
+            -- ============================
+            { "<leader>C", group = "AI 助手 (Claude)" },
+            { "<leader>Cc", desc = "切換 Claude Code" },
+            { "<leader>Cf", desc = "聚焦 Claude Code" },
+            { "<leader>Cm", desc = "選擇 Claude 模型" },
+            { "<leader>Cs", desc = "發送選取內容到 Claude", mode = "v" },
+            { "<leader>Ca", desc = "添加當前文件到 Claude" },
+            { "<leader>CA", desc = "添加選取範圍到 Claude", mode = "v" },
+            { "<leader>Cy", desc = "接受 Claude 的修改" },
+            { "<leader>Cn", desc = "拒絕 Claude 的修改" },
 
             -- ============================
             -- 代碼折疊 (nvim-ufo)

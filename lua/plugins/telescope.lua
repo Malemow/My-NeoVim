@@ -14,6 +14,9 @@ return {
         --     build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
         -- },
         "nvim-tree/nvim-web-devicons",  -- 檔案圖示
+        {
+            "nvim-telescope/telescope-file-browser.nvim",  -- 檔案瀏覽器擴展，支援 .. 導航
+        },
     },
     config = function()
         local telescope = require("telescope")
@@ -84,12 +87,35 @@ return {
                     end,
                 },
             },
+            extensions = {
+                -- ============================
+                -- File Browser 擴展配置
+                -- ============================
+                file_browser = {
+                    theme = "ivy",
+                    hijack_netrw = false,  -- 不替換 netrw
+                    hidden = { file_browser = true, folder_browser = true },  -- 顯示隱藏檔案
+                    respect_gitignore = false,  -- 顯示 .gitignore 中的檔案
+                    -- 啟用路徑導航（可輸入 .. 返回上層）
+                    path_display = { "smart" },
+                    mappings = {
+                        ["i"] = {
+                            -- 在插入模式下可以直接輸入 ../
+                        },
+                        ["n"] = {
+                            -- h 返回上層
+                            ["h"] = require("telescope").extensions.file_browser.actions.goto_parent_dir,
+                        },
+                    },
+                },
+            },
         })
 
         -- ============================
         -- 載入擴充功能
         -- ============================
         -- telescope.load_extension("fzf")  -- 載入 fzf 原生搜尋（編譯失敗時先註解）
+        telescope.load_extension("file_browser")  -- 載入 file browser 擴展
 
         -- ============================
         -- 快捷鍵設定
@@ -98,6 +124,12 @@ return {
 
         -- 搜尋檔案（在當前專案中）
         keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "搜尋檔案" })
+
+        -- 檔案瀏覽器（支援輸入 .. 返回上層）
+        keymap.set("n", "<leader>fe", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = "檔案瀏覽器 (可輸入 ..)" })
+
+        -- 從根目錄打開檔案瀏覽器
+        keymap.set("n", "<leader>fE", "<cmd>Telescope file_browser<cr>", { desc = "檔案瀏覽器 (根目錄)" })
 
         -- 搜尋檔案（從 Home 目錄）
         keymap.set("n", "<leader>fh", function()

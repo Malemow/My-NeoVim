@@ -21,7 +21,8 @@ return {
             comment = { suffix = "o", options = {} },
 
             -- 衝突標記導航（Git merge conflicts）
-            conflict = { suffix = "x", options = {} },
+            -- 已禁用，因為 [x/]x 用於 Trouble 問題導航
+            conflict = { suffix = "", options = {} },
 
             -- 診斷導航（已有 [d ]d，這裡保持一致）
             diagnostic = { suffix = "d", options = {} },
