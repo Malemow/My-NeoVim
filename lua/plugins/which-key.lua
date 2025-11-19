@@ -83,19 +83,40 @@ return {
             { "<leader>e", desc = "開關檔案樹" },
 
             -- ============================
-            -- Buffer 管理
+            -- Buffer 管理 (bufferline)
             -- ============================
             { "<leader>b", group = "Buffer 管理" },
             { "<leader>bn", desc = "新增空白 buffer" },
             { "<leader>bd", desc = "關閉 buffer" },
             { "<leader>bD", desc = "強制關閉 buffer" },
+            { "<leader>bp", desc = "選擇 Buffer" },
+            { "<leader>bc", desc = "選擇並關閉 Buffer" },
+            { "<leader>bh", desc = "關閉左側所有標籤" },
+            { "<leader>bl", desc = "關閉右側所有標籤" },
+            { "<leader>bo", desc = "關閉其他所有標籤" },
+            { "<leader>bP", desc = "釘選/取消釘選 Buffer" },
+            { "<leader>bm", desc = "向右移動標籤" },
+            { "<leader>bM", desc = "向左移動標籤" },
+            { "<leader>bg", desc = "切換分組" },
             { "<leader>q", desc = "關閉當前 buffer" },
             { "<leader>Q", desc = "強制關閉 buffer（不儲存）" },
             { "[b", desc = "上一個 buffer" },
             { "]b", desc = "下一個 buffer" },
 
+            -- 數字快速跳轉
+            { "<leader>1", desc = "跳到標籤 1" },
+            { "<leader>2", desc = "跳到標籤 2" },
+            { "<leader>3", desc = "跳到標籤 3" },
+            { "<leader>4", desc = "跳到標籤 4" },
+            { "<leader>5", desc = "跳到標籤 5" },
+            { "<leader>6", desc = "跳到標籤 6" },
+            { "<leader>7", desc = "跳到標籤 7" },
+            { "<leader>8", desc = "跳到標籤 8" },
+            { "<leader>9", desc = "跳到標籤 9" },
+            { "<leader>$", desc = "跳到最後一個標籤" },
+
             -- ============================
-            -- Telescope 搜尋
+            -- 搜尋與替換
             -- ============================
             { "<leader>f", group = "搜尋 (Find)" },
             { "<leader>ff", desc = "搜尋檔案" },
@@ -111,6 +132,13 @@ return {
             { "<leader>f?", desc = "搜尋說明文件" },
             { "<leader>ft", desc = "搜尋 TODO 註解" },
             { "<leader>fT", desc = "搜尋 TODO/FIX/FIXME" },
+
+            -- Grug-far 全局替換
+            { "<leader>R", desc = "打開 Grug-far（全局搜尋替換）" },
+            { "<leader>r", group = "替換 (Replace)" },
+            { "<leader>rw", desc = "替換當前單詞（Grug-far）" },
+            { "<leader>rw", desc = "替換選取內容（Grug-far）", mode = "v" },
+            { "<leader>rf", desc = "在當前文件替換（Grug-far）" },
 
             -- ============================
             -- Git 操作
@@ -216,6 +244,19 @@ return {
             { "<A-j>", desc = "向下移動", mode = { "n", "v" } },
             { "<A-k>", desc = "向上移動", mode = { "n", "v" } },
             { "<A-l>", desc = "向右移動/增加縮排", mode = { "n", "v" } },
+
+            -- ============================
+            -- 標記管理 (marks.nvim)
+            -- ============================
+            { "m", group = "標記 (Marks)" },
+            { "m,", desc = "列出所有標記" },
+            { "m;", desc = "列出當前 buffer 的標記" },
+            { "m]", desc = "跳到下一個標記" },
+            { "m[", desc = "跳到上一個標記" },
+            { "m:", desc = "預覽標記" },
+            { "dm", group = "刪除標記" },
+            { "dm-", desc = "刪除當前行的標記" },
+            { "dm=", desc = "刪除當前 buffer 所有標記" },
 
             -- ============================
             -- Noice 命令
