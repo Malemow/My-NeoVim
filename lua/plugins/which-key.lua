@@ -107,6 +107,8 @@ return {
             { "<leader>fb", desc = "搜尋 Buffers" },
             { "<leader>fk", desc = "搜尋快捷鍵" },
             { "<leader>f?", desc = "搜尋說明文件" },
+            { "<leader>ft", desc = "搜尋 TODO 註解" },
+            { "<leader>fT", desc = "搜尋 TODO/FIX/FIXME" },
 
             -- ============================
             -- Git 操作
@@ -132,8 +134,15 @@ return {
             -- ============================
             { "<leader>c", group = "程式碼 (Code)" },
             { "<leader>ca", desc = "程式碼動作", mode = { "n", "v" } },
-            { "<leader>d", desc = "顯示錯誤詳情" },
+            { "<leader>cd", desc = "顯示錯誤詳情" },
             { "<leader>rn", desc = "重新命名符號" },
+
+            -- 文檔註解生成 (Neogen)
+            { "<leader>cg", group = "生成註解" },
+            { "<leader>cgf", desc = "生成函數註解" },
+            { "<leader>cgc", desc = "生成類別註解" },
+            { "<leader>cgt", desc = "生成類型註解" },
+            { "<leader>cgF", desc = "生成文件註解" },
 
             -- LSP 診斷導航
             { "[d", desc = "上一個錯誤" },
@@ -187,12 +196,14 @@ return {
             { "]y", desc = "下一個 yank" },
 
             -- 程式碼導航
-            { "[t", desc = "上一個 Tree-sitter 節點" },
-            { "]t", desc = "下一個 Tree-sitter 節點" },
             { "[o", desc = "上一個註解/舊檔案" },
             { "]o", desc = "下一個註解/舊檔案" },
             { "[x", desc = "上一個衝突標記" },
             { "]x", desc = "下一個衝突標記" },
+
+            -- TODO 註解導航
+            { "[t", desc = "上一個 TODO 註解" },
+            { "]t", desc = "下一個 TODO 註解" },
 
             -- ============================
             -- 快速跳轉與移動
@@ -207,6 +218,14 @@ return {
             { "<A-l>", desc = "向右移動/增加縮排", mode = { "n", "v" } },
 
             -- ============================
+            -- Noice 命令
+            -- ============================
+            { "<leader>n", group = "Noice (通知/訊息)" },
+            { "<leader>nh", desc = "顯示 Noice 歷史" },
+            { "<leader>nd", desc = "關閉所有通知" },
+            { "<leader>ne", desc = "顯示錯誤" },
+
+            -- ============================
             -- Package 管理（package.json 中）
             -- ============================
             { "<leader>p", group = "Package 管理" },
@@ -217,6 +236,51 @@ return {
             { "<leader>pd", desc = "刪除套件" },
             { "<leader>pi", desc = "安裝新套件" },
             { "<leader>pc", desc = "修改套件版本" },
+
+            -- ============================
+            -- 調試器 (nvim-dap)
+            -- ============================
+            { "<leader>d", group = "調試 (Debug)" },
+            { "<leader>db", desc = "切換中斷點" },
+            { "<leader>dB", desc = "條件中斷點" },
+            { "<leader>dc", desc = "繼續執行/開始調試" },
+            { "<leader>di", desc = "步入" },
+            { "<leader>do", desc = "步過" },
+            { "<leader>dO", desc = "步出" },
+            { "<leader>dr", desc = "切換 REPL" },
+            { "<leader>dl", desc = "重新執行上次調試" },
+            { "<leader>dt", desc = "終止調試" },
+            { "<leader>du", desc = "切換調試 UI" },
+            { "<leader>de", desc = "評估表達式", mode = { "n", "v" } },
+
+            -- ============================
+            -- 終端管理 (toggleterm)
+            -- ============================
+            { "<leader>t", group = "終端 (Terminal)" },
+            { "<leader>tt", desc = "浮動終端" },
+            { "<leader>th", desc = "水平終端" },
+            { "<leader>tv", desc = "垂直終端" },
+            { "<leader>tg", desc = "Lazygit 終端" },
+            { "<leader>tn", desc = "Node 終端" },
+            { "<leader>tp", desc = "Python 終端" },
+            { "<C-\\>", desc = "切換終端" },
+
+            -- ============================
+            -- 會話管理 (persistence)
+            -- ============================
+            { "<leader>S", group = "會話 (Session)" },
+            { "<leader>Ss", desc = "恢復會話" },
+            { "<leader>Sl", desc = "恢復上次會話" },
+            { "<leader>Sd", desc = "停止會話記錄" },
+
+            -- ============================
+            -- 代碼折疊 (nvim-ufo)
+            -- ============================
+            { "zR", desc = "打開所有折疊" },
+            { "zM", desc = "關閉所有折疊" },
+            { "zr", desc = "減少折疊層級" },
+            { "zm", desc = "增加折疊層級" },
+            { "zp", desc = "預覽折疊或顯示懸浮資訊" },
         })
 
         -- ============================
