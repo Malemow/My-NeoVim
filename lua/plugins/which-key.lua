@@ -74,8 +74,12 @@ return {
         -- ============================
         wk.add({
             -- ============================
-            -- 核心編輯功能
+            -- 核心編輯功能（來自 core/keymaps.lua）
             -- ============================
+            -- 插入模式
+            { "jk", desc = "返回普通模式（代替 ESC）", mode = "i" },
+
+            -- 普通模式
             { "<leader>s", group = "分割視窗" },
             { "<leader>sv", desc = "垂直分割" },
             { "<leader>sh", desc = "水平分割" },
@@ -83,25 +87,29 @@ return {
             { "<leader>e", desc = "開關檔案樹" },
 
             -- ============================
-            -- Buffer 管理 (bufferline)
+            -- Buffer 管理
             -- ============================
             { "<leader>b", group = "Buffer 管理" },
+
+            -- 基本操作（來自 core/keymaps.lua）
             { "<leader>bn", desc = "新增空白 buffer" },
-            { "<leader>bd", desc = "關閉 buffer" },
-            { "<leader>bD", desc = "強制關閉 buffer" },
+            { "[b", desc = "上一個 buffer" },
+            { "]b", desc = "下一個 buffer" },
+
+            -- Buffer 刪除（來自 mini-bufremove.lua）
+            { "<leader>q", desc = "關閉當前 buffer" },
+            { "<leader>Q", desc = "強制關閉 buffer（不儲存）" },
+
+            -- 進階操作（來自 bufferline.lua）
             { "<leader>bp", desc = "選擇 Buffer" },
             { "<leader>bc", desc = "選擇並關閉 Buffer" },
-            { "<leader>bh", desc = "關閉左側所有標籤" },
-            { "<leader>bl", desc = "關閉右側所有標籤" },
+            { "<leader>bl", desc = "關閉左側所有標籤" },
+            { "<leader>br", desc = "關閉右側所有標籤" },
             { "<leader>bo", desc = "關閉其他所有標籤" },
             { "<leader>bP", desc = "釘選/取消釘選 Buffer" },
             { "<leader>bm", desc = "向右移動標籤" },
             { "<leader>bM", desc = "向左移動標籤" },
             { "<leader>bg", desc = "切換分組" },
-            { "<leader>q", desc = "關閉當前 buffer" },
-            { "<leader>Q", desc = "強制關閉 buffer（不儲存）" },
-            { "[b", desc = "上一個 buffer" },
-            { "]b", desc = "下一個 buffer" },
 
             -- 數字快速跳轉
             { "<leader>1", desc = "跳到標籤 1" },
@@ -122,8 +130,6 @@ return {
             { "<leader>ff", desc = "搜尋檔案" },
             { "<leader>fe", desc = "檔案瀏覽器 (可輸入 ..)" },
             { "<leader>fE", desc = "檔案瀏覽器 (根目錄)" },
-            { "<leader>fh", desc = "搜尋檔案 (Home)" },
-            { "<leader>fF", desc = "搜尋檔案 (根目錄)" },
             { "<leader>fr", desc = "搜尋最近檔案" },
             { "<leader>fs", desc = "搜尋文字內容" },
             { "<leader>fc", desc = "搜尋當前檔案" },
@@ -164,7 +170,8 @@ return {
             -- ============================
             { "<leader>c", group = "程式碼 (Code)" },
             { "<leader>ca", desc = "程式碼動作", mode = { "n", "v" } },
-            { "<leader>cd", desc = "顯示錯誤詳情" },
+            { "<leader>cf", desc = "格式化程式碼" },
+            { "<leader>d", desc = "顯示錯誤詳情" },
             { "<leader>rn", desc = "重新命名符號" },
 
             -- 文檔註解生成 (Neogen)
@@ -173,6 +180,11 @@ return {
             { "<leader>cgc", desc = "生成類別註解" },
             { "<leader>cgt", desc = "生成類型註解" },
             { "<leader>cgF", desc = "生成文件註解" },
+
+            -- 符號大綱
+            { "<leader>cl", desc = "開關符號大綱 (Aerial)" },
+            { "[a", desc = "上一個符號" },
+            { "]a", desc = "下一個符號" },
 
             -- LSP 診斷導航
             { "[d", desc = "上一個錯誤" },
@@ -187,16 +199,12 @@ return {
             { "<C-k>", desc = "函式簽名提示", mode = "n" },
 
             -- ============================
-            -- 代碼地圖與大綱
+            -- 代碼地圖
             -- ============================
-            { "<leader>m", group = "代碼地圖 (Map)" },
-            { "<leader>mm", desc = "開關代碼地圖" },
-            { "<leader>mf", desc = "聚焦代碼地圖" },
-            { "<leader>mr", desc = "刷新代碼地圖" },
-
-            { "<leader>a", desc = "開關符號大綱 (Aerial)" },
-            { "[a", desc = "上一個符號" },
-            { "]a", desc = "下一個符號" },
+            -- 代碼地圖（mini.map）在 <leader>m 群組中
+            { "<leader>mm", desc = "開關代碼地圖 (mini.map)" },
+            { "<leader>mf", desc = "聚焦代碼地圖 (mini.map)" },
+            { "<leader>mr", desc = "刷新代碼地圖 (mini.map)" },
 
             -- 縮排範圍導航（mini.indentscope）
             { "[i", desc = "跳到縮排範圍頂部 / 上一個縮排變化" },
@@ -259,10 +267,25 @@ return {
             { "dm=", desc = "刪除當前 buffer 所有標記" },
 
             -- ============================
+            -- Marks 書籤管理
+            -- ============================
+            { "<leader>m", group = "Marks 書籤 / Markdown / 代碼地圖" },
+            { "<leader>ml", desc = "列出 buffer 標記" },
+            { "<leader>mL", desc = "列出全局標記" },
+            { "<leader>mb", desc = "列出所有書籤" },
+            { "<leader>m0", desc = "列出 [重要] 書籤" },
+            { "<leader>m1", desc = "列出 [待辦] 書籤" },
+            { "<leader>m2", desc = "列出 [完成] 書籤" },
+            { "<leader>m3", desc = "列出 [問題] 書籤" },
+            { "<leader>m4", desc = "列出 [重點] 書籤" },
+            { "<leader>mt", desc = "切換標記顯示" },
+            { "<leader>md", desc = "開關 Markdown 即時渲染" },
+
+            -- ============================
             -- Noice 命令
             -- ============================
             { "<leader>n", group = "Noice (通知/訊息)" },
-            { "<leader>nh", desc = "顯示 Noice 歷史" },
+            { "<leader>nH", desc = "顯示 Noice 歷史" },
             { "<leader>nd", desc = "關閉所有通知" },
             { "<leader>ne", desc = "顯示錯誤" },
 
@@ -336,15 +359,14 @@ return {
             -- ============================
             -- AI 助手 (Claude Code)
             -- ============================
-            { "<leader>C", group = "AI 助手 (Claude)" },
-            { "<leader>Cc", desc = "切換 Claude Code" },
-            { "<leader>Cf", desc = "聚焦 Claude Code" },
-            { "<leader>Cm", desc = "選擇 Claude 模型" },
-            { "<leader>Cs", desc = "發送選取內容到 Claude", mode = "v" },
-            { "<leader>Ca", desc = "添加當前文件到 Claude" },
-            { "<leader>CA", desc = "添加選取範圍到 Claude", mode = "v" },
-            { "<leader>Cy", desc = "接受 Claude 的修改" },
-            { "<leader>Cn", desc = "拒絕 Claude 的修改" },
+            { "<leader>a", group = "AI 助手 (Claude)" },
+            { "<leader>ac", desc = "切換 Claude Code" },
+            { "<leader>af", desc = "聚焦 Claude Code" },
+            { "<leader>aC", desc = "繼續 Claude Continue" },
+            { "<leader>am", desc = "選擇 Claude 模型" },
+            { "<leader>ab", desc = "發送 Current Buffer 內容到 Claude" },
+            { "<leader>as", desc = "發送選取內容到 Claude", mode = "v" },
+            { "<leader>as", desc = "添加當前文件到 Claude" },
 
             -- ============================
             -- 代碼折疊 (nvim-ufo)
@@ -376,12 +398,25 @@ return {
         -- - 按 <C-w> → 看到所有視窗命令
         --
         -- 【快捷鍵分組總覽】
-        -- <Space>s*  : 分割視窗
-        -- <Space>b*  : Buffer 管理
-        -- <Space>f*  : Telescope 搜尋
-        -- <Space>g*  : Git 操作
-        -- <Space>h*  : Git Hunk 操作
-        -- <Space>c*  : 程式碼相關
+        -- 核心快捷鍵（core/keymaps.lua）：
+        --   jk         : 插入模式返回普通模式
+        --   <Space>s*  : 分割視窗
+        --   <Space>bn  : 新增 buffer
+        --   [b / ]b    : 上/下一個 buffer
+        --   <Space>nh  : 清除搜尋高亮
+        --   <Space>e   : 開關檔案樹
+        --
+        -- 插件快捷鍵：
+        --   <Space>q/Q : Buffer 刪除（mini.bufremove）
+        --   <Space>b*  : Buffer 管理（bufferline）
+        --   <Space>f*  : Telescope 搜尋
+        --   <Space>g*  : Git 操作
+        --   <Space>h*  : Git Hunk 操作
+        --   <Space>c*  : 程式碼相關（LSP）
+        --   <Space>n*  : Noice 通知
+        --   <Space>x*  : Trouble 診斷
+        --   <Space>d*  : 調試器（DAP）
+        --   <Space>t*  : 終端管理
         --
         -- 【如何添加新快捷鍵】
         -- 在上面的 wk.add() 中添加：

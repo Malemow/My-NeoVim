@@ -156,7 +156,7 @@ return {
         local keymap = vim.keymap
 
         -- 開關 aerial 視窗
-        keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>", { desc = "開關符號大綱" })
+        keymap.set("n", "<leader>cl", "<cmd>AerialToggle<CR>", { desc = "開關符號大綱" })
 
         -- 跳到下一個符號
         keymap.set("n", "]a", "<cmd>AerialNext<CR>", { desc = "下一個符號" })
@@ -173,7 +173,7 @@ return {
         -- 使用說明
         -- ============================
         -- 【基本使用】
-        -- <Space>a     : 開關符號大綱視窗
+        -- <Space>cl     : 開關符號大綱視窗
         -- ]a           : 跳到下一個符號
         -- [a           : 跳到上一個符號
         --

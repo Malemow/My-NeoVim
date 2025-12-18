@@ -15,59 +15,46 @@ return {
     "ClaudeCodeAdd",
     "ClaudeCodeDiffAccept",
     "ClaudeCodeDiffDeny",
+    "ClaudeCodeTreeAdd"
   },
   keys = {
     -- 主要功能
     {
-      "<leader>Cc",
+      "<leader>ac",
       "<cmd>ClaudeCode<cr>",
       desc = "切換 Claude Code",
     },
     {
-      "<leader>Cf",
+      "<leader>af",
       "<cmd>ClaudeCodeFocus<cr>",
       desc = "聚焦 Claude Code",
     },
     {
-      "<leader>Cs",
+      "<leader>aC",
+      "<cmd>ClaudeCode --continue<cr>",
+      desc = "繼續 Claude Continue",
+    },
+    {
+      "<leader>am",
+      "<cmd>ClaudeCodeSelectModel<cr>",
+      desc = "選擇 Claude Continue Model",
+    },
+    {
+      "<leader>ab",
+      "<cmd>ClaudeCodeAdd %<cr>",
+      desc = "發送 Current Buffer 內容到 Claude",
+    },
+    {
+      "<leader>as",
       "<cmd>ClaudeCodeSend<cr>",
       mode = "v",
       desc = "發送選取內容到 Claude",
     },
     {
-      "<leader>Cm",
-      "<cmd>ClaudeCodeSelectModel<cr>",
-      desc = "選擇 Claude 模型",
-    },
-    {
-      "<leader>Ca",
-      function()
-        -- 添加當前文件到 Claude 上下文
-        vim.cmd("ClaudeCodeAdd " .. vim.fn.expand("%"))
-      end,
+      "<leader>as",
+      "<cmd>ClaudeCodeTreeAdd<cr>",
       desc = "添加當前文件到 Claude",
-    },
-    {
-      "<leader>CA",
-      function()
-        -- 添加當前文件的選取範圍到 Claude
-        local start_line = vim.fn.line("'<")
-        local end_line = vim.fn.line("'>")
-        vim.cmd("ClaudeCodeAdd " .. vim.fn.expand("%") .. ":" .. start_line .. ":" .. end_line)
-      end,
-      mode = "v",
-      desc = "添加選取範圍到 Claude",
-    },
-    -- Diff 操作
-    {
-      "<leader>Cy",
-      "<cmd>ClaudeCodeDiffAccept<cr>",
-      desc = "接受 Claude 的修改",
-    },
-    {
-      "<leader>Cn",
-      "<cmd>ClaudeCodeDiffDeny<cr>",
-      desc = "拒絕 Claude 的修改",
+      ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" }
     },
   },
   opts = {

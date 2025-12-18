@@ -31,25 +31,10 @@ keymap.set("n", "<leader>nh", ":nohl<CR>")
 
 -- -------- buffer 操作 --------
 
--- 切換到下一個 buffer（使用 ]b 向後跳）
-keymap.set("n", "]b", ":bnext<CR>")
-
--- 切換到上一個 buffer（使用 [b 向前跳）
-keymap.set("n", "[b", ":bprevious<CR>")
-
 -- 開啟新的空白 buffer
 keymap.set("n", "<leader>bn", ":enew<CR>", { desc = "新增空白 buffer" })
 
--- 關閉當前 buffer（使用 mini.bufremove 保留視窗佈局）
-keymap.set("n", "<leader>q", function()
-    require("mini.bufremove").delete(0, false)
-end, { desc = "關閉當前 buffer" })
-
--- 強制關閉當前 buffer（使用 mini.bufremove 保留視窗佈局）
-keymap.set("n", "<leader>Q", function()
-    require("mini.bufremove").delete(0, true)
-end, { desc = "強制關閉 buffer（不儲存）" })
-
+-- 注意：Buffer 刪除快捷鍵（<leader>q / <leader>Q）在 mini-bufremove.lua 中定義
 -- 注意：<C-h/j/k/l> 保留給 vim-tmux-navigator 使用（窗口導航）
 
 -- =========================
@@ -57,4 +42,4 @@ end, { desc = "強制關閉 buffer（不儲存）" })
 -- =========================
 
 -- nvim-tree：開關檔案樹
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+-- keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")

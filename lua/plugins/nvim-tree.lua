@@ -27,14 +27,6 @@ return {
                 indent_markers = {
                     enable = true,  -- 顯示縮排線，更容易看清檔案層級
                 },
-                icons = {
-                    glyphs = {
-                        folder = {
-                            arrow_closed = "",  -- 資料夾關閉時的箭頭
-                            arrow_open = "",    -- 資料夾開啟時的箭頭
-                        },
-                    },
-                },
             },
             actions = {
                 open_file = {
@@ -54,8 +46,8 @@ return {
         -- ============================
         -- 快捷鍵設定
         -- ============================
-        -- 注意：<leader>e 已經在 core/keymaps.lua 中設定為 :NvimTreeToggle
-        -- 所以不需要在這裡重複設定
+        local keymap = vim.keymap
+        keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "切換檔案樹" })
 
         -- ============================
         -- 常用快捷鍵說明（在 nvim-tree 視窗中使用）

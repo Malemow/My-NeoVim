@@ -11,6 +11,11 @@ return {
         "MunifTanjim/nui.nvim",  -- UI 組件庫
         "rcarriga/nvim-notify",  -- 通知後端
     },
+    keys = {
+        { "<leader>nH", "<cmd>Noice<cr>", desc = "顯示 Noice 歷史" },
+        { "<leader>nd", "<cmd>Noice dismiss<cr>", desc = "關閉所有通知" },
+        { "<leader>ne", "<cmd>Noice errors<cr>", desc = "顯示錯誤" },
+    },
     config = function()
         require("noice").setup({
             -- ============================
@@ -68,6 +73,23 @@ return {
             },
 
             -- ============================
+            -- 命令列設定
+            -- ============================
+            cmdline = {
+                enabled = true,
+                view = "cmdline_popup",        -- 使用彈出式命令列
+                opts = {},
+                format = {
+                    cmdline = { icon = "" },
+                    search_down = { icon = " " },
+                    search_up = { icon = " " },
+                    filter = { icon = "$" },
+                    lua = { icon = "" },
+                    help = { icon = "?" },
+                },
+            },
+
+            -- ============================
             -- 預設設定
             -- ============================
             presets = {
@@ -98,6 +120,13 @@ return {
                     win_options = {
                         winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
                     },
+                },
+                cmdline_popupcursor = {
+                    relative = "cursor",
+                    zindex = 60,
+                    position = { row = 1, col = 0 },
+                    size = { width = "auto", height = "auto" },
+                    border = { style = "rounded", padding = { 0, 1 } },
                 },
                 popupmenu = {
                     relative = "editor",
@@ -210,14 +239,14 @@ return {
         --    搜尋訊息更清楚
         --
         -- 【快捷鍵】
-        -- :Noice         : 開啟 Noice 歷史記錄
-        -- :Noice dismiss : 關閉所有通知
-        -- :Noice errors  : 顯示所有錯誤
-        -- :Noice stats   : 顯示統計資訊
+        -- <Space>nH      : 顯示 Noice 歷史記錄
+        -- <Space>nd      : 關閉所有通知
+        -- <Space>ne      : 顯示所有錯誤
+        -- :Noice stats   : 顯示統計資訊（命令）
         --
         -- 【通知歷史】
         -- 所有通知都會被記錄
-        -- 使用 :Noice 可以查看歷史通知
+        -- 使用 <Space>nH 可以查看歷史通知
         --
         -- 【注意事項】
         -- 1. 第一次載入可能會稍慢（需要初始化）

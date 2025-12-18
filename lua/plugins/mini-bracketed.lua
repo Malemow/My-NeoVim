@@ -14,7 +14,7 @@ return {
             -- ============================
             -- 每個類型都可以設定為 true/false 或自訂選項
 
-            -- Buffer 導航（已有 [b ]b，這裡保持一致）
+            -- Buffer 導航
             buffer = { suffix = "b", options = {} },
 
             -- 註解區塊導航
@@ -24,7 +24,7 @@ return {
             -- 已禁用，因為 [x/]x 用於 Trouble 問題導航
             conflict = { suffix = "", options = {} },
 
-            -- 診斷導航（已有 [d ]d，這裡保持一致）
+            -- 診斷導航
             diagnostic = { suffix = "d", options = {} },
 
             -- 檔案導航（在目錄中的上/下一個檔案）⭐ 超實用

@@ -15,30 +15,30 @@ return {
             -- 整合器（決定顯示什麼內容）
             -- ============================
             integrations = {
-                map.gen_integration.builtin_search(),  -- 顯示搜尋結果
-                map.gen_integration.diagnostic(),      -- 顯示診斷（錯誤、警告）
-                map.gen_integration.gitsigns(),        -- 顯示 Git 變更
+                map.gen_integration.builtin_search(), -- 顯示搜尋結果
+                map.gen_integration.diagnostic(),     -- 顯示診斷（錯誤、警告）
+                map.gen_integration.gitsigns(),       -- 顯示 Git 變更
             },
 
             -- ============================
             -- 符號設定
             -- ============================
             symbols = {
-                encode = map.gen_encode_symbols.dot("4x2"),  -- 使用點陣圖顯示
-                scroll_line = "█",   -- 滾動條符號
-                scroll_view = "┃",   -- 視圖範圍符號
+                encode = map.gen_encode_symbols.dot("4x2"), -- 使用點陣圖顯示
+                scroll_line = "█", -- 滾動條符號
+                scroll_view = "┃", -- 視圖範圍符號
             },
 
             -- ============================
             -- 視窗設定
             -- ============================
             window = {
-                focusable = false,           -- 不能聚焦到地圖視窗
-                side = "right",              -- 在右側顯示
-                show_integration_count = false,  -- 不顯示整合數量
-                width = 15,                  -- 寬度（字元數）
-                winblend = 25,               -- 透明度（0-100，0 是不透明）
-                zindex = 10,                 -- 層級
+                focusable = false,              -- 不能聚焦到地圖視窗
+                side = "right",                 -- 在右側顯示
+                show_integration_count = false, -- 不顯示整合數量
+                width = 15,                     -- 寬度（字元數）
+                winblend = 25,                  -- 透明度（0-100，0 是不透明）
+                zindex = 10,                    -- 層級
             },
         })
 

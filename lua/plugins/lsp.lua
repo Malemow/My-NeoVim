@@ -55,6 +55,7 @@ return {
                     -- 數據格式
                     "jsonls",           -- JSON
                     "yamlls",           -- YAML
+                    "taplo"             -- TOML
 
                     -- 如果你用其他語言，可以加上：
                     -- "rust_analyzer",  -- Rust
@@ -142,7 +143,7 @@ return {
                 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "下一個錯誤" }))
 
                 -- 格式化程式碼
-                vim.keymap.set("n", "<leader>f", function()
+                vim.keymap.set("n", "<leader>cf", function()
                     vim.lsp.buf.format({ async = true })
                 end, vim.tbl_extend("force", opts, { desc = "格式化程式碼" }))
             end
@@ -253,6 +254,13 @@ return {
 
                 -- YAML
                 yamlls = {},
+
+                -- TOML
+                taplo = {
+                    filetypes = { "toml" },
+                    -- 重要：這對於在非 git 存儲庫中使用 taplo LSP 是必需的
+                    root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+                },
             }
 
             -- 統一配置所有 LSP 伺服器
@@ -291,7 +299,7 @@ return {
             -- <Space>ca        : 程式碼動作（快速修復）
             -- <Space>d         : 顯示錯誤詳情
             -- [d / ]d          : 跳到上/下一個錯誤
-            -- <Space>f         : 格式化程式碼
+            -- <Space>cf        : 格式化程式碼
             --
             -- 【管理 LSP 伺服器】
             -- :Mason           : 開啟 Mason UI（安裝/更新 LSP）

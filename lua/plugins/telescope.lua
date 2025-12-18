@@ -35,6 +35,35 @@ return {
                 path_display = { "smart" },  -- 智能顯示路徑（縮短長路徑）
 
                 -- ============================
+                -- 效能優化（避免大目錄卡住）
+                -- ============================
+                file_ignore_patterns = {
+                    "%.git/",
+                    "node_modules/",
+                    "%.cache/",
+                    "build/",
+                    "dist/",
+                    "%.next/",
+                    "%.nuxt/",
+                    "target/",
+                },
+                vimgrep_arguments = {
+                    "rg",
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    "--smart-case",
+                    "--trim",  -- 移除開頭的空白，提升效能
+                },
+                -- 搜尋結果限制（避免記憶體爆掉）
+                cache_picker = {
+                    num_pickers = 10,
+                    limit_entries = 1000,
+                },
+
+                -- ============================
                 -- 快捷鍵設定（在 Telescope 視窗中使用）
                 -- ============================
                 mappings = {
@@ -131,23 +160,6 @@ return {
         -- 從根目錄打開檔案瀏覽器
         keymap.set("n", "<leader>fE", "<cmd>Telescope file_browser<cr>", { desc = "檔案瀏覽器 (根目錄)" })
 
-        -- 搜尋檔案（從 Home 目錄）
-        keymap.set("n", "<leader>fh", function()
-            require("telescope.builtin").find_files({
-                prompt_title = "Find Files (Home Directory)",
-                cwd = vim.fn.expand("~"),
-            })
-        end, { desc = "搜尋檔案（Home 目錄）" })
-
-        -- 搜尋檔案（從根目錄 / 整個系統）
-        keymap.set("n", "<leader>fF", function()
-            require("telescope.builtin").find_files({
-                prompt_title = "Find Files (Root Directory)",
-                cwd = vim.fn.has("win32") == 1 and "C:\\" or "/",
-                no_ignore = true,  -- 不忽略 .gitignore 中的檔案
-            })
-        end, { desc = "搜尋檔案（根目錄）" })
-
         -- 搜尋最近開啟的檔案
         keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "搜尋最近檔案" })
 
@@ -187,8 +199,6 @@ return {
         --
         -- 【快捷鍵總覽】
         -- <Space>ff    : 搜尋檔案（當前專案）⭐ 最常用
-        -- <Space>fh    : 搜尋檔案（Home 目錄）⭐ 新增
-        -- <Space>fF    : 搜尋檔案（根目錄/整個系統）⭐ 新增
         -- <Space>fs    : 搜尋文字內容（類似 Ctrl+Shift+F）
         -- <Space>fb    : 搜尋已開啟的 buffer
         -- <Space>fr    : 搜尋最近開啟的檔案

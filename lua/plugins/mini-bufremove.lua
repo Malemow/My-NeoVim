@@ -7,6 +7,22 @@
 return {
     "echasnovski/mini.bufremove",
     version = false,
+    keys = {
+        {
+            "<leader>q",
+            function()
+                require("mini.bufremove").delete(0, false)
+            end,
+            desc = "關閉當前 buffer",
+        },
+        {
+            "<leader>Q",
+            function()
+                require("mini.bufremove").delete(0, true)
+            end,
+            desc = "強制關閉 buffer（不儲存）",
+        },
+    },
     config = function()
         require("mini.bufremove").setup({
             -- ============================
@@ -26,11 +42,9 @@ return {
         -- 一般的 :bd (buffer delete) 會刪除 buffer 並關閉視窗
         -- mini.bufremove 會刪除 buffer 但保留視窗，並自動顯示下一個 buffer
         --
-        -- 【快捷鍵】（已在 core/keymaps.lua 設定）
+        -- 【快捷鍵】（在本檔案的 keys 中定義）
         -- <Space>q     : 刪除當前 buffer（保留視窗）
         -- <Space>Q     : 強制刪除當前 buffer（保留視窗，不儲存）
-        -- <Space>bd    : 刪除當前 buffer（保留視窗）
-        -- <Space>bD    : 強制刪除當前 buffer（保留視窗）
         --
         -- 【使用情境】
         --

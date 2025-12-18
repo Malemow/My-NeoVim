@@ -26,8 +26,8 @@ return {
     -- Buffer 管理
     { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "選擇 Buffer" },
     { "<leader>bc", "<cmd>BufferLinePickClose<cr>", desc = "選擇並關閉 Buffer" },
-    { "<leader>bh", "<cmd>BufferLineCloseLeft<cr>", desc = "關閉左側所有標籤" },
-    { "<leader>bl", "<cmd>BufferLineCloseRight<cr>", desc = "關閉右側所有標籤" },
+    { "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", desc = "關閉左側所有標籤" },
+    { "<leader>br", "<cmd>BufferLineCloseRight<cr>", desc = "關閉右側所有標籤" },
     { "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", desc = "關閉其他所有標籤" },
     { "<leader>bP", "<cmd>BufferLineTogglePin<cr>", desc = "釘選/取消釘選 Buffer" },
 
@@ -45,7 +45,7 @@ return {
       -- ============================
       mode = "buffers", -- "tabs" 或 "buffers"
       themable = true,
-      numbers = "none", -- "none" | "ordinal" | "buffer_id" | "both"
+      numbers = "buffer_id", -- "none" | "ordinal" | "buffer_id" | "both"
 
       -- ============================
       -- 關閉按鈕
@@ -63,8 +63,8 @@ return {
       -- 指示器（當前 buffer 標記）
       -- ============================
       indicator = {
-        icon = "▎", -- 當前 buffer 左側的標記
-        style = "icon", -- 'icon' | 'underline' | 'none'
+        -- icon = "▎", -- 當前 buffer 左側的標記
+        style = "underline", -- 'icon' | 'underline' | 'none'
       },
 
       -- ============================

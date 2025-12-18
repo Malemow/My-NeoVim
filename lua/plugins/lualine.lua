@@ -58,14 +58,52 @@ return {
                 lualine_b = { "branch", "diff" }, -- Git 分支 + diff 統計
                 lualine_c = {
                     {
-                        "filename",
-                        file_status = true,     -- 顯示檔案狀態（修改、唯讀等）
-                        path = 1,               -- 0: 只顯示檔名, 1: 相對路徑, 2: 絕對路徑
+                      "filename",                 -- 顯示目前檔案名稱
+
+                      file_status = true,          -- 顯示檔案狀態（是否唯讀、是否已修改）
+                      newfile_status = false,      -- 是否顯示「新檔案」狀態（建立後尚未寫入磁碟）
+
+                      path = 4,                    -- 檔案路徑顯示方式
+                                                   -- 0：只顯示檔名
+                                                   -- 1：顯示相對路徑
+                                                   -- 2：顯示完整絕對路徑
+                                                   -- 3：顯示完整絕對路徑，家目錄以 ~ 取代
+                                                   -- 4：顯示父目錄 + 檔名，家目錄以 ~ 取代
+
+                      shorting_target = 40,        -- 當路徑過長時自動縮短，保留 40 個字元空間給其他元件
+                                                   -- 也可以改成 function 動態回傳縮短目標長度
+
+                      symbols = {
+                        modified = '[+]',          -- 檔案已修改但尚未儲存
+                        readonly = '[-]',          -- 檔案為唯讀或不可寫
+                        unnamed = '[無名稱]',      -- 未命名的 buffer
+                        newfile = '[新檔案]',      -- 新建但尚未寫入的檔案
+                      }
                     }
                 },
 
                 -- 右側區域
                 lualine_x = {
+                    -- Noice 命令狀態（顯示部分輸入的命令，如 g、d 等）
+                    {
+                        function()
+                            return require("noice").api.status.command.get()
+                        end,
+                        cond = function()
+                            return package.loaded["noice"] and require("noice").api.status.command.has()
+                        end,
+                        color = { fg = "#ff9e64" },
+                    },
+                    -- Noice 模式狀態
+                    {
+                        function()
+                            return require("noice").api.status.mode.get()
+                        end,
+                        cond = function()
+                            return package.loaded["noice"] and require("noice").api.status.mode.has()
+                        end,
+                        color = { fg = "#ff9e64" },
+                    },
                     {
                         "diagnostics",          -- 顯示 LSP 診斷訊息（錯誤、警告等）
                         sources = { "nvim_lsp" },
@@ -76,12 +114,20 @@ return {
                             hint = " ",
                         },
                     },
+                    "lsp_status",
                     "encoding",                 -- 檔案編碼（utf-8 等）
                     "fileformat",               -- 檔案格式（unix, dos, mac）
                     "filetype",                 -- 檔案類型
                 },
                 lualine_y = { "progress" },     -- 檔案進度（百分比）
-                lualine_z = { "location" },     -- 游標位置（行:列）
+                lualine_z = {
+                    "selectioncount",
+                    "location", -- 游標位置（行:列）
+                    {
+                        "datetime",
+                        style = "%H:%M"
+                    },
+                },
             },
 
             -- 非當前視窗的狀態列（較簡化）
