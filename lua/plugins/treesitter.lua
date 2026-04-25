@@ -12,7 +12,7 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",  -- 文字物件（選取函式、類別等）
     },
     config = function()
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter")
 
         treesitter.setup({
             -- ============================
