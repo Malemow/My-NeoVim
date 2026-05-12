@@ -21,6 +21,16 @@ require("core.options")
 require("core.keymaps")
 
 -- ============================
--- 3. 載入所有插件
+-- 3. 相容性修正
+-- ============================
+-- Neovim 0.10+ 移除了 ft_to_lang，Telescope 仍依賴此函數
+if not vim.treesitter.language.ft_to_lang then
+  vim.treesitter.language.ft_to_lang = function(ft)
+    return vim.treesitter.language.get_lang(ft) or ft
+  end
+end
+
+-- ============================
+-- 4. 載入所有插件
 -- ============================
 require("lazy").setup("plugins")

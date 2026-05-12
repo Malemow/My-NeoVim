@@ -12,16 +12,26 @@ return {
     config = function()
         local lualine = require("lualine")
 
+        -- 使用 dracula 作為基礎主題（更適合 dracula_pro）
+        local transparent_theme = require("lualine.themes.dracula")
+        
+        -- 將所有部分的背景設為 NONE
+        for _, mode in pairs(transparent_theme) do
+            for _, section in pairs(mode) do
+                if type(section) == "table" then
+                    section.bg = "NONE"
+                    -- 如果文字顏色太淺，可以在這裡強制加深或調整
+                    -- 但通常 dracula 主題的 fg 已經很鮮豔
+                end
+            end
+        end
+
         lualine.setup({
             -- ============================
             -- 主題設定
             -- ============================
             options = {
-                theme = "auto",  -- 自動適配你的配色主題
-                -- 其他主題選項：
-                -- "gruvbox", "tokyonight", "catppuccin",
-                -- "dracula", "nord", "onedark", "palenight"
-
+                theme = transparent_theme,
                 -- ============================
                 -- 分隔符號樣式
                 -- ============================
